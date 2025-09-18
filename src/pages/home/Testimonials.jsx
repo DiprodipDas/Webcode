@@ -1,37 +1,6 @@
 import React from 'react'
 import HeadingSection from '../../components/HeadingSection'
 
-const reviews = [
-    {
-        id: 1,
-        logo: "/public/images/logos/logo1.png",
-        review: "Excelent support. Really I love this tool.",
-        author: "MD. Faruk",
-        role: "Software Engineer at DIU"
-    },
-    {
-        id: 2,
-        logo: "/public/images/logos/logo2.png",
-        review: "I Use this tool since 2019.It provides me great support. I wish all the very best to the team",
-        author: "Bilash Hossain",
-        role: "IT Officer at BracNet"
-    },
-    {
-        id: 3,
-        logo: "/public/images/logos/logo1.png",
-        review: "Webcode really doing great.There vision is soo clear. I am truely satisfied with their support.",
-        author: "MD. khalekuzzaman",
-        role: "IT Officer at DIU"
-    },
-    {
-        id: 4,
-        logo: "/public/images/logos/logo2.png",
-        review: "What a great tool it is.Now I used to with this tool.I regularly used this tool.",
-        author: "Rezuana Shammy",
-        role: "Software Engineer at QTech Solution LTD"
-    },
-]
-
 const Testimonials = () => {
     return (
         <div className='bg-gray-100'>
