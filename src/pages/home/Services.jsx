@@ -1,6 +1,6 @@
 import React from 'react'
 import HeadingSection from '../../components/HeadingSection'
-import { FiCalendar,FiCompass,FiActivity,FiTruck  } from "react-icons/fa";
+import {FiCalendar,FiCompass,FiTruck, FiActivity } from "react-icons/fi";
 
 
 const services=[
