@@ -45,6 +45,13 @@ const Services = () => {
 
     </div>
 
+     <div className='text-center'>
+                <button className='bg-blue-600 text-white px-6 py-3 rounded-md 
+                         hover:bg-amber-400 transition'>
+                            Explore More
+                          </button>
+        </div>
+
     </div>
   )
 }
