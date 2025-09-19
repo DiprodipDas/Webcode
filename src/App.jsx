@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Outlet } from 'react-router'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +15,7 @@ function App() {
     <main className='min-h-screen'>
       <Outlet/>
     </main>
-    <footer>Footer</footer>
+    <Footer></Footer>
     </>
   )
 }

@@ -47,11 +47,11 @@ const blogs=[
 const Blogs = () => {
   return (
     <div className='max-w-screen container mx-auto py-20 px-5'>
-        <HeadingSection heading='Letest Articles and Insights' subheading='Our Blogs'/>
+        <HeadingSection heading='Latest Articles and Insights' subheading='Our Blogs'/>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10'>
             {
-              blogs.map((blog,index)=>(
+              blogs.map((blog)=>(
                 <div key={blog.id} className='bg-white shadow-md rounded-lg overflow-hidden cursor-pointer'>
                     <img src={blog.image} alt={blog.title} className='w-full h-48 object-cover hover:scale-105 transition transform' />
 
