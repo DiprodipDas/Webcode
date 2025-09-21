@@ -4,8 +4,13 @@ import { useAuth } from '../context/AuthContext'
 
 const Navbar = () => {
 
-    const { user } = useAuth()
+    const { user,logout} = useAuth()
     console.log(user)
+
+
+    const handleLogOut=()=>{
+        logout();
+    }
     return (
         <div className="navbar max-w-screen-2xl container bg-white px-5 shadow-sm">
             <div className="navbar-start">
@@ -59,7 +64,7 @@ const Navbar = () => {
 
                 {
                     user ? (<><Link to='/dashboard' className="btn btn-outline btn-primary px-8 hidden sm:flex">Dashboard</Link>
-                        <button className="btn btn-primary text-white ml-4">Log Out</button></>) : (<><Link to='/login' className="btn btn-outline btn-primary px-8 hidden sm:flex">Log in</Link>
+                        <button onClick={handleLogOut} className="btn btn-primary text-white ml-4">Log Out</button></>) : (<><Link to='/login' className="btn btn-outline btn-primary px-8 hidden sm:flex">Log in</Link>
                             <Link to='/Pricing' className="btn btn-primary text-white ml-4">Start Free Trial</Link></>)
                 }
 

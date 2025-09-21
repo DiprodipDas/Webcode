@@ -12,6 +12,8 @@ import Blogs from './pages/home/Blogs.jsx'
 import Register from './components/Register.jsx'
 import Login from './components/Login.jsx'
 import AuthProvider from './context/AuthContext.jsx'
+import PrivateRoute from './routes/PrivateRoute.jsx'
+import Dashboard from './pages/dashboard/Dashboard.jsx'
 
 createRoot(document.getElementById('root')).render(
   <AuthProvider>
@@ -30,6 +32,8 @@ createRoot(document.getElementById('root')).render(
         </Route>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+
+        <Route path='/dashboard' element={<PrivateRoute><Dashboard></Dashboard></PrivateRoute>} />
       </Routes>
     </BrowserRouter>
   </AuthProvider>,
