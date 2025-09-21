@@ -1,19 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaGoogle, FaGithub, FaFacebook } from "react-icons/fa";
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
     const {
-            register,
-            handleSubmit,
-            watch,
-            formState: { errors },
-        } = useForm();
-        const onSubmit = data => console.log(data);
-  return (
-   <div className='flex items-center justify-center min-h-screen bg-gray-100 p-5'>
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const[error,setError]=useState("")
+
+    const { loginWithEmail, googleLogin } = useAuth()
+    const navigate = useNavigate()
+
+    const onSubmit = async data => {
+        try {
+            await loginWithEmail(data.email, data.password);
+            console.log("Login Sucessfull")
+
+            Swal.fire({
+                title: "Login Successfull",
+                icon: "success",
+                draggable: true,
+
+            });
+            setError("")
+            navigate("/")
+        } catch (error) {
+            console.error("Login Failed", error.message)
+            setError("Failed to login.Please provide currect email & password.")
+        }
+    }
+
+    //google login 
+
+    const handleGoogleLogin=async()=>{
+     try {
+        await googleLogin();
+        navigate('/');
+     } catch (error) {
+        console.error("Failed to login" , error)
+     }
+    }
+    return (
+        <div className='flex items-center justify-center min-h-screen bg-gray-100 p-5'>
             <div className='w-full max-w-md p-8 space-y-6 bg-white shadow-md rounded-lg'>
                 <h2 className='text-2xl font-bold text-center text-gray-800'>Please Login</h2>
 
@@ -32,25 +67,26 @@ const Login = () => {
                             {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be at least 6 characters long." } })}
                             className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2`}
                             type="password" />
-                            {errors.password && <p className='text-sm italic text-red-500 mt-2'>{errors.password.message}</p>}
+                        {errors.password && <p className='text-sm italic text-red-500 mt-2'>{errors.password.message}</p>}
                     </div>
-
-                    <button className='w-full py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700' type='submit'>Log in</button>
+                     
+                     {error && <p className='text-sm italic text-red-500 mt-2'>{error}</p>}
+                    <button className='w-full py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 cursor-pointer' type='submit'>Log in</button>
                 </form>
 
 
                 <div className='text-center space-y-4'>
                     <p className='text-gray-600'>Or login with</p>
                     <div className='flex flex-col sm:flex-row justify-center gap-4 '>
-                        <button className=' flex w-full items-center px-4 py-2 space-x-2 text-white bg-red-500 rounded-md hover:bg-red-600'>
+                        <button onClick={handleGoogleLogin} className=' flex cursor-pointer w-full items-center px-4 py-2 space-x-2 text-white bg-red-500 rounded-md hover:bg-red-600'>
                             <FaGoogle />
                             <span>Google</span>
                         </button>
-                        <button className=' flex w-full items-center px-4 py-2 space-x-2 text-white bg-gray-900 rounded-md hover:bg-gray-950'>
+                        <button className=' flex cursor-pointer w-full items-center px-4 py-2 space-x-2 text-white bg-gray-900 rounded-md hover:bg-gray-950'>
                             <FaGithub />
                             <span>Github</span>
                         </button>
-                        <button className=' flex w-full items-center px-4 py-2 space-x-2 text-white bg-blue-500 rounded-md hover:bg-blue-600'>
+                        <button className=' flex cursor-pointer w-full items-center px-4 py-2 space-x-2 text-white bg-blue-500 rounded-md hover:bg-blue-600'>
                             <FaFacebook />
                             <span>Facebook</span>
                         </button>
@@ -62,7 +98,7 @@ const Login = () => {
                 </p>
             </div>
         </div>
-  )
+    )
 }
 
 export default Login
